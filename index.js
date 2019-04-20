@@ -59,7 +59,9 @@ const prethodniDan = (datum) =>// funkcija vraca datum prethodnog dana
 const prviDanuSedmici = (datum) => //funkcija vraca prvi dan u sedmici u kojoj je taj datum
   {
     let datumNovi = new Date(datum);
-    let brojIteracija = datumNovi.getDay()-1;    
+    let brojIteracija = datumNovi.getDay()-1;  
+    if(brojIteracija==-1)
+    brojIteracija=6;
     while(brojIteracija!=0)
     {
       datum=prethodniDan(datum);
@@ -68,13 +70,85 @@ const prviDanuSedmici = (datum) => //funkcija vraca prvi dan u sedmici u kojoj j
     return datum;
   }
 
-/*
 
-app.post('/addZabiljeska/:idTermin/:idStudent',function(req,res)
-{
+
+app.get('/addZabiljeska/:Zabiljeska/:idStudent/:idGrupaTermina/:ispit',function(req,res)
+{    
+    /*db.zabiljeska.create({naziv:req.params.Zabiljeska,idStudent:req.params.idStudent}).then(function(k){
+        db.grupaZabiljeska.create({idGrupaTermina:req.params.idGrupaTermina,idZabiljeska:k.idZabiljeska}).then(function(link){
+        var jsonString;
+        if(k!=null && link!=null)
+        {
+            jsonString=
+            {
+                success:true
+            }            
+        }
+        else
+        {
+            jsonString=
+            {
+                success:false
+            }
+        }
+        res.writeHead(200, {'Content-Type': 'application/json'});        
+        res.end(JSON.stringify(jsonString));
+        });
+    }); */
+    var newID = parseInt(new Date().getTime().toString().substring(4));
     
+    db.zabiljeska.create({idZabiljeska:newID,naziv:req.params.Zabiljeska,idStudent:req.params.idStudent}).then(function(k){            
+        console.log(req.params.ispit); 
+        var isTrueSet = (req.params.ispit == 'true');  
+        if(isTrueSet)
+            {
+                db.ispitZabiljeska.create({idIspitZabiljeska:newID,idIspit:req.params.idGrupaTermina,idZabiljeska:k.idZabiljeska}).then(function(link){
+                    var jsonString;
+                    if(k!=null && link!=null)
+                    {
+                        jsonString=
+                        {
+                            success:true
+                        }            
+                    }
+                    else
+                    {
+                        jsonString=
+                        {
+                            success:false
+                        }
+                    }
+                    res.writeHead(200, {'Content-Type': 'application/json'});        
+                    res.end(JSON.stringify(jsonString));                    
+                });
+            }
+            else
+            {
+                db.grupaZabiljeska.create({idGrupaZabiljeska:newID,idGrupaTermina:req.params.idGrupaTermina,idZabiljeska:k.idZabiljeska}).then(function(link){
+                    
+                    var jsonString;
+                    if(k!=null && link!=null)
+                    {
+                        jsonString=
+                        {
+                            success:true
+                        }            
+                    }
+                    else
+                    {
+                        jsonString=
+                        {
+                            success:false
+                        }
+                    }
+                    res.writeHead(200, {'Content-Type': 'application/json'});        
+                    res.end(JSON.stringify(jsonString));
+                });                
+            }           
+        });    
 })
 
+/*
 app.post('/updateZabiljeska/:idTermin/:idStudent',function(req,res)
 {
    
@@ -170,7 +244,8 @@ app.get('/getTermini/:idStudenta',function(req,res)
                                             sala:linkovaniKabinet.namjena,
                                             trajanje:termin.trajanje,
                                             predavac:linkovaniPredavac.ime + ' ' + linkovaniPredavac.prezime,
-                                            biljeska:biljeskica
+                                            biljeska:biljeskica,
+                                            ispit:false
                                         }
                                     );
                                     iVarTermin++; 
@@ -245,7 +320,8 @@ app.get('/getIspiti/:idStudenta',function(req,res)
                                         sala:ispit.sala,
                                         trajanje:ispit.vrijemeTrajanja,
                                         predavac:linkovaniPredavac.ime + ' ' + linkovaniPredavac.prezime,
-                                        biljeska:biljeskica    
+                                        biljeska:biljeskica,
+                                        ispit:true    
                                     }
                                 );
                                 iVarIspit++; 

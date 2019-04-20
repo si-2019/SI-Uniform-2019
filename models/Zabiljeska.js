@@ -18,10 +18,6 @@ module.exports = function(sequelize, DataTypes) {
     naziv: {
       type: DataTypes.STRING(50),
       allowNull: true
-    },
-    datum: {
-      type: DataTypes.DATE,
-      allowNull: true
     }
   }, {
     tableName: 'Zabiljeska'
