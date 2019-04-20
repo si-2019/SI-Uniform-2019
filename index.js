@@ -229,6 +229,9 @@ app.get('/updateZabiljeska/:Zabiljeska/:idStudent/:idGrupaTermina/:ispit',functi
         });
     }
 })
+app.get('/deleteZabiljeska/:idStudent/:idGrupaTermina/:ispit',function(req,res){
+
+});
 /*
 app.post('/deleteZabiljeska/:idTermin/:idStudent',function(req,res)
 {
