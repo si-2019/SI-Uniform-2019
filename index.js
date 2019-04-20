@@ -128,9 +128,14 @@ app.get('/addZabiljeska/:Zabiljeska/:idStudent/:idGrupaTermina/:ispit',function(
 })
 
 
-app.get('/updateZabiljeska/:idTermin/:idStudent',function(req,res)
+app.get('/updateZabiljeska/:Zabiljeska/:idStudent/:idGrupaTermina/:ispit',function(req,res)
 {
-   
+    var isTrueSet = (req.params.ispit == 'true'); 
+    var jsonString={};
+
+    res.writeHead(200, {'Content-Type': 'application/json'});        
+    res.end(JSON.stringify(jsonString));
+
 })
 /*
 app.post('/deleteZabiljeska/:idTermin/:idStudent',function(req,res)
