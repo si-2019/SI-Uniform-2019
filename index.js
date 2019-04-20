@@ -56,7 +56,7 @@ const prethodniDan = (datum) =>// funkcija vraca datum prethodnog dana
     
   }
 
-const prviDanuSedmici = (datum) => //funkcija vraca prvi dan u sedmici u kojoj je taj datum
+const prviDanuSedmici = (datum) => //funkcija vraca prvi dan u sedmici u kojo je taj datum
   {
     let datumNovi = new Date(datum);
     let brojIteracija = datumNovi.getDay()-1;  
