@@ -213,8 +213,6 @@ app.get('/getIspiti/:idStudenta',function(req,res)
                                 var biljeskica="";
                                 if(linkovaneZabiljeskeStudent && linkovaneZabiljeskeIspit)
                                 {
-                                    console.log(linkovaneZabiljeskeIspit);
-                                    console.log(linkovaneZabiljeskeStudent);
                                     for(var iii=0;iii<linkovaneZabiljeskeStudent.length;iii++)
                                     {
                                         for(var jjj=0;jjj<linkovaneZabiljeskeIspit.length;jjj++)
