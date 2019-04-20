@@ -230,14 +230,62 @@ app.get('/updateZabiljeska/:Zabiljeska/:idStudent/:idGrupaTermina/:ispit',functi
     }
 })
 app.get('/deleteZabiljeska/:idStudent/:idGrupaTermina/:ispit',function(req,res){
+    var isTrueSet = (req.params.ispit == 'true'); 
     var jsonString={};
     jsonString=
     {
        success:false
     }  
-
-    res.writeHead(200, {'Content-Type': 'application/json'});        
-    res.end(JSON.stringify(jsonString));
+    if(isTrueSet)
+    {
+        db.ispitZabiljeska.findAll({where:{idIspit:req.params.idGrupaTermina}}).then(function(linkovaneZabiljeskeIspit){
+            db.zabiljeska.findAll({where:{idStudent:req.params.idStudent}}).then(function(linkovaneZabiljeskeStudent){
+                var trazeniID="";
+                if(linkovaneZabiljeskeStudent && linkovaneZabiljeskeIspit)
+                {
+                    for(var iii=0;iii<linkovaneZabiljeskeStudent.length;iii++)
+                    {
+                        for(var jjj=0;jjj<linkovaneZabiljeskeIspit.length;jjj++)
+                        {
+                            if(linkovaneZabiljeskeStudent[iii].idZabiljeska==linkovaneZabiljeskeIspit[jjj].idZabiljeska)
+                            {   
+                                db.zabiljeska.update({
+                                    naziv: "",
+                                }, {
+                                    where: {
+                                        idZabiljeska:linkovaneZabiljeskeStudent[iii].idZabiljeska
+                                      }
+                                    }
+                                ).then(function(zabiljeska){
+                                    if(zabiljeska.naziv=="")
+                                    {
+                                      jsonString=
+                                      {
+                                         success:true
+                                      } 
+                                    }
+                                    res.writeHead(200, {'Content-Type': 'application/json'});        
+                                    res.end(JSON.stringify(jsonString));
+                                });
+                                
+                                iii=linkovaneZabiljeskeStudent.length;
+                                jjj=linkovaneZabiljeskeIspit.length;
+                            }  
+                        } 
+                    }
+                }
+                else
+                {
+                    res.writeHead(200, {'Content-Type': 'application/json'});        
+                    res.end(JSON.stringify(jsonString));
+                }
+            });
+        });
+    }
+    else
+    {
+       
+    }
 
 });
 /*
