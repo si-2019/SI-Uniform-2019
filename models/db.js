@@ -16,6 +16,7 @@ db.predmet = sequelize.import(__dirname+'/Predmet.js');
 db.korisnik = sequelize.import(__dirname+'/Korisnik.js');
 
 //relacije
+
 db.predmet.hasMany(db.termin,{as:'termini',foreignKey:'idPredmet'});
 db.kabinet.hasMany(db.termin,{as:'termini',foreignKey:'idKabinet'});
 db.korisnik.hasMany(db.termin,{as:'termini',foreignKey:'idPredavac'});

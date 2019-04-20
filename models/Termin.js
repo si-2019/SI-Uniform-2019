@@ -7,20 +7,12 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       primaryKey: true
     },
-    idPredavac: {
+    idGrupe: {
       type: DataTypes.INTEGER(10),
       allowNull: false,
       references: {
-        model: 'Korisnik',
-        key: 'idkorisnik'
-      }
-    },
-    idPredmet: {
-      type: DataTypes.INTEGER(10),
-      allowNull: false,
-      references: {
-        model: 'Predmet',
-        key: 'idpredmet'
+        model: 'GrupaTermina',
+        key: 'idgrupe'
       }
     },
     idKabinet: {
@@ -39,8 +31,8 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER(10),
       allowNull: true
     },
-    datum: {
-      type: DataTypes.DATE,
+    vrijeme: {
+      type: DataTypes.STRING(10),
       allowNull: true
     },
     trajanje: {

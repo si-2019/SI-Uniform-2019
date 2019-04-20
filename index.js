@@ -29,16 +29,49 @@ app.set('view engine', 'pug');
 
 app.post('/addTermin',function(req,res)
 {
-    
+    /*db.termin.create({naziv:"Predavanje",danUSedmici:"2",datum:new Date(),trajanje:"90"}).then(function(k){
+        return new Promise(function(resolve,reject){resolve(k);});
+    })*/
+      
+
+
+
+
+
+
 })
 
 app.get('/getTermini/:idStudenta',function(req,res)
 {
     // pretpostavljamo da je id studenta 1
-   var jsonString=new Array();
-    
-   res.writeHead(200, {'Content-Type': 'application/json'});        
-   res.end(JSON.stringify(jsonString));  
+    var jsonString=new Array();
+    db.termin.findAll().then(function(spisakTerminaDB){
+        var velicina=spisakTerminaDB.length-1;
+        var iVar=-1;
+        spisakTerminaDB.forEach(termin => { 
+            
+            db.predmet.findOne({where:{id:termin.idPredmet}}).then(function(linkaniPredmet){
+                db.zabiljeska.findOne
+                jsonString.push(
+                    {
+                        id:termin.idTermin,
+                        title:termin.naziv,
+                        predmet:linkaniPredmet.naziv,
+                        datum:termin.datum,
+                        vrijeme:termin.datum,
+                        sala:termin.idKabinet,
+                        trajanje:termin.trajanje
+                    }
+                );
+                iVar++; 
+                if(iVar==velicina)
+                {
+                    res.writeHead(200, {'Content-Type': 'application/json'});        
+                    res.end(JSON.stringify(jsonString));
+                }
+            });             
+        });        
+    });    
 });
 
 app.get('/getIspiti',function(req,res)
@@ -89,8 +122,79 @@ app.get('/getIspiti',function(req,res)
             sala:'S8',
             trajanje:'120'
         }
-    ]    
-    var jsonContent={};
+    ]
+    
+    var vel=spisakIspita.length;
+
+     
+    var jsonContent="[";
+    if(vel!=0)
+    {
+        jsonContent+="{\n";
+        jsonContent+="\"id\": ";
+        jsonContent+="\"";
+        jsonContent+=spisakIspita[0].id;
+        jsonContent+="\",";
+        jsonContent+="\n\"title\": ";
+        jsonContent+="\"";
+        jsonContent+=spisakIspita[0].title;
+        jsonContent+="\",";
+        jsonContent+="\n\"predmet\": ";
+        jsonContent+="\"";
+        jsonContent+=spisakIspita[0].predmet;
+        jsonContent+="\",";
+        jsonContent+="\n\"datum\": ";
+        jsonContent+="\"";
+        jsonContent+=spisakIspita[0].datum;
+        jsonContent+="\",";
+        jsonContent+="\n\"vrijeme\": ";
+        jsonContent+="\"";
+        jsonContent+=spisakIspita[0].vrijeme;
+        jsonContent+="\",";
+        jsonContent+="\n\"sala\": ";
+        jsonContent+="\"";
+        jsonContent+=spisakIspita[0].sala;
+        jsonContent+="\",";
+        jsonContent+="\n\"trajanje\": ";
+        jsonContent+="\"";
+        jsonContent+=spisakIspita[0].trajanje;
+        jsonContent+="\"";
+        jsonContent+="}";    
+    }
+     for(let i=1;i<vel;i++)
+    {
+        jsonContent+=",{\n";
+        jsonContent+="\"id\": ";
+        jsonContent+="\"";
+        jsonContent+=spisakIspita[i].id;
+        jsonContent+="\",";
+        jsonContent+="\n\"title\": ";
+        jsonContent+="\"";
+        jsonContent+=spisakIspita[i].title;
+        jsonContent+="\",";
+        jsonContent+="\n\"predmet\": ";
+        jsonContent+="\"";
+        jsonContent+=spisakIspita[i].predmet;
+        jsonContent+="\",";
+        jsonContent+="\n\"datum\": ";
+        jsonContent+="\"";
+        jsonContent+=spisakIspita[i].datum;
+        jsonContent+="\",";
+        jsonContent+="\n\"vrijeme\": ";
+        jsonContent+="\"";
+        jsonContent+=spisakIspita[i].vrijeme;
+        jsonContent+="\",";
+        jsonContent+="\n\"sala\": ";
+        jsonContent+="\"";
+        jsonContent+=spisakIspita[i].sala;
+        jsonContent+="\",";
+        jsonContent+="\n\"trajanje\": ";
+        jsonContent+="\"";
+        jsonContent+=spisakIspita[i].trajanje;
+        jsonContent+="\"";
+        jsonContent+="}";
+    }
+    jsonContent+="]";
     res.writeHead(200, {'Content-Type': 'application/json'});        
     res.end(jsonContent);  
 });
@@ -99,12 +203,38 @@ app.get('/getIspiti',function(req,res)
 
 //   TUDJE RUTE
 
+
+
 app.get('/getPredmet/:predmetID',function(req,res)
 {
-   var jsonPredmet={};
-    res.end(JSON.stringify(jsonPredmet)); 
+    
+    db.predmet.findOne({where:{id:req.params.predmetID}}).then(function(predmet)
+    {
+        if(predmet==null)
+        {
+            console.log("Ne postoji predmet sa id-em " + req.params.predmetID)                    
+        }
+        else
+        {
+            res.writeHead(200, {'Content-Type': 'application/json'});
+            var jsonPredmet = 
+            {
+                id:predmet.id.toString(),
+                idAsistent:predmet.idAsistent.toString(),
+                idProfesor:predmet.idProfesor.toString(),
+                naziv:predmet.naziv.toString(),
+                ects:predmet.ects.toString(),
+                brojPredavanja:predmet.brojPredavanja.toString(),
+                brojVjezbi:predmet.brojVjezbi.toString(),
+                opis:predmet.opis.toString()
+            };                 
+            res.end(JSON.stringify(jsonPredmet));  
+        }                
+    });
 })
 
+// Treba mi ruta koja vraca predmet za dati id
+// Treba mi ruta koja vraca korisnika za dati id
 
 
 
