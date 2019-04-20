@@ -230,6 +230,14 @@ app.get('/updateZabiljeska/:Zabiljeska/:idStudent/:idGrupaTermina/:ispit',functi
     }
 })
 app.get('/deleteZabiljeska/:idStudent/:idGrupaTermina/:ispit',function(req,res){
+    var jsonString={};
+    jsonString=
+    {
+       success:false
+    }  
+
+    res.writeHead(200, {'Content-Type': 'application/json'});        
+    res.end(JSON.stringify(jsonString));
 
 });
 /*
