@@ -23,8 +23,28 @@ module.exports = function(sequelize, DataTypes) {
         key: 'idkorisnik'
       }
     },
+    idKabinet: {
+      type: DataTypes.INTEGER(10),
+      allowNull: false,
+      references: {
+        model: 'Kabinet',
+        key: 'idkabinet'
+      }
+    },
     naziv: {
       type: DataTypes.STRING(255),
+      allowNull: true
+    },
+    danUSedmici: {
+      type: DataTypes.INTEGER(10),
+      allowNull: true
+    },
+    vrijeme: {
+      type: DataTypes.STRING(10),
+      allowNull: true
+    },
+    trajanje: {
+      type: DataTypes.INTEGER(10),
       allowNull: true
     }
   }, {

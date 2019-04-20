@@ -11,8 +11,8 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER(10),
       allowNull: true,
       references: {
-        model: 'Termin',
-        key: 'idIspit'
+        model: 'Ispit',
+        key: 'idispit'
       }
     },
     idZabiljeska: {

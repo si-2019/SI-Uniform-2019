@@ -9,27 +9,15 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 //import modela
-db.termin = sequelize.import(__dirname+'/Termin.js');
 db.zabiljeska = sequelize.import(__dirname+'/Zabiljeska.js');
 db.kabinet = sequelize.import(__dirname+'/Kabinet.js');
 db.predmet = sequelize.import(__dirname+'/Predmet.js');
 db.korisnik = sequelize.import(__dirname+'/Korisnik.js');
+db.grupaTermina = sequelize.import(__dirname+'/GrupaTermina.js');
+db.ispit = sequelize.import(__dirname+'/Ispit.js');
+db.grupaZabiljeska = sequelize.import(__dirname+'/GrupaZabiljeska.js');
+db.ispitZabiljeska = sequelize.import(__dirname+'/IspitZabiljeska.js');
 
-//relacije
 
-db.predmet.hasMany(db.termin,{as:'termini',foreignKey:'idPredmet'});
-db.kabinet.hasMany(db.termin,{as:'termini',foreignKey:'idKabinet'});
-db.korisnik.hasMany(db.termin,{as:'termini',foreignKey:'idPredavac'});
-
-// Veza n-m 
-db.termin_zabiljeska = db.zabiljeska.belongsToMany(db.termin,{as:'termini',through:'TerminZabiljeska',foreignKey:'idZabiljeska'});
-db.termin.belongsToMany(db.zabiljeska,{as:'zabiljeske',through:'TerminZabiljeska',foreignKey:'idTermin'});
-
-/*
-// Veza n-m 
-db.vjezba_zadatak = db.zadatak.belongsToMany(db.vjezba,{as:'vjezbe',through:'vjezba_zadatak',foreignKey:'idzadatak'});
-db.vjezba.belongsToMany(db.zadatak,{as:'zadaci',through:'vjezba_zadatak',foreignKey:'idvjezba'});
-
-*/
 
 module.exports=db;

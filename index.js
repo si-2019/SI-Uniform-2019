@@ -27,176 +27,243 @@ app.use(express.static('public'));
 app.set('views',path.join(__dirname+"/public/",'views'));
 app.set('view engine', 'pug');
 
-app.post('/addTermin',function(req,res)
+const sljedeciDan = (datum) =>// funkcija vraca datum sljedeceg dana
 {
-    /*db.termin.create({naziv:"Predavanje",danUSedmici:"2",datum:new Date(),trajanje:"90"}).then(function(k){
-        return new Promise(function(resolve,reject){resolve(k);});
-    })*/
-      
+  var today = new Date(datum);
+  var tomorrow = new Date();
+  tomorrow.setDate(today.getDate()+1);
+  
+  var dd = String(tomorrow.getDate()).padStart(2, '0');
+  var mm = String(tomorrow.getMonth() + 1).padStart(2, '0'); //Januar je 0!
+  var yyyy = tomorrow.getFullYear();
+  datum = yyyy + '/' + mm + '/' + dd;
+  
+  return datum;
+}
 
+const prethodniDan = (datum) =>// funkcija vraca datum prethodnog dana
+  {
+    var today = new Date(datum);
+    var yesterday = new Date();
+    yesterday.setDate(today.getDate()-1);
+    
+    var dd = String(yesterday.getDate()).padStart(2, '0');
+    var mm = String(yesterday.getMonth() + 1).padStart(2, '0'); //Januar je 0!
+    var yyyy = yesterday.getFullYear();
+    datum = yyyy + '/' + mm + '/' + dd;
+    
+    return datum;
+    
+  }
 
+const prviDanuSedmici = (datum) => //funkcija vraca prvi dan u sedmici u kojoj je taj datum
+  {
+    let datumNovi = new Date(datum);
+    let brojIteracija = datumNovi.getDay()-1;    
+    while(brojIteracija!=0)
+    {
+      datum=prethodniDan(datum);
+      brojIteracija--;
+    }
+    return datum;
+  }
 
+/*
 
-
-
+app.post('/addZabiljeska/:idTermin/:idStudent',function(req,res)
+{
+    
 })
+
+app.post('/updateZabiljeska/:idTermin/:idStudent',function(req,res)
+{
+   
+})
+
+app.post('/deleteZabiljeska/:idTermin/:idStudent',function(req,res)
+{
+   
+})
+
+app.get('/getTermini/:idStudent',function(req,res)
+{
+    Radi se
+})
+
+app.get('/getGrupe',function(req,res)
+{
+   
+})
+
+app.post('/deleteGrupa/:idGrupe',function(req,res)
+{
+   
+})
+
+*/
 
 app.get('/getTermini/:idStudenta',function(req,res)
 {
+    //ruta vraca sedmicne termine za odredjenog studenta
+
     // pretpostavljamo da je id studenta 1
+    // kad se sredi autorizacija i autentikacija promijenicemo
+    var idStudenta = 1;
+
     var jsonString=new Array();
-    db.termin.findAll().then(function(spisakTerminaDB){
-        var velicina=spisakTerminaDB.length-1;
-        var iVar=-1;
-        spisakTerminaDB.forEach(termin => { 
-            
-            db.predmet.findOne({where:{id:termin.idPredmet}}).then(function(linkaniPredmet){
-                db.zabiljeska.findOne
-                jsonString.push(
-                    {
-                        id:termin.idTermin,
-                        title:termin.naziv,
-                        predmet:linkaniPredmet.naziv,
-                        datum:termin.datum,
-                        vrijeme:termin.datum,
-                        sala:termin.idKabinet,
-                        trajanje:termin.trajanje
-                    }
-                );
-                iVar++; 
-                if(iVar==velicina)
-                {
-                    res.writeHead(200, {'Content-Type': 'application/json'});        
-                    res.end(JSON.stringify(jsonString));
-                }
-            });             
-        });        
+    db.grupaTermina.findAll().then(function(spisakTerminaDB){
+        var velicinaTermina=spisakTerminaDB.length-1;
+        var iVarTermin=-1;
+        if(spisakTerminaDB.length==0)
+        {
+            res.writeHead(200, {'Content-Type': 'application/json'});        
+            res.end(JSON.stringify(jsonString));             
+        }
+        else
+        {
+            spisakTerminaDB.forEach(termin => {                 
+                db.predmet.findOne({where:{id:termin.idPredmet}}).then(function(linkaniPredmetTermin){
+                    db.korisnik.findOne({where:{id:termin.idPredavac}}).then(function(linkovaniPredavac){ 
+                        db.kabinet.findOne({where:{idKabinet:termin.idKabinet}}).then(function(linkovaniKabinet){ 
+                            db.grupaZabiljeska.findAll({where:{idGrupaTermina:termin.idGrupaTermina}}).then(function(linkovaneZabiljeskeGrupa){
+                                db.zabiljeska.findAll({where:{idStudent:idStudenta}}).then(function(linkovaneZabiljeskeStudent){
+                                    var biljeskica="";
+                                    if(linkovaneZabiljeskeGrupa && linkovaneZabiljeskeStudent)
+                                    {
+                                        
+                                        for(var iii=0;iii<linkovaneZabiljeskeStudent.length;iii++)
+                                        {
+                                            for(var jjj=0;jjj<linkovaneZabiljeskeGrupa.length;jjj++)
+                                            {
+                                                if(linkovaneZabiljeskeStudent[iii].idZabiljeska==linkovaneZabiljeskeGrupa[jjj].idZabiljeska)
+                                                {
+                                                    
+                                                    biljeskica=linkovaneZabiljeskeStudent[iii].naziv;
+                                                    iii=linkovaneZabiljeskeStudent.length;
+                                                    jjj=linkovaneZabiljeskeGrupa.length;
+                                                }  
+                                            } 
+                                        }
+
+                                    }
+                                    
+
+
+                                    var datumce = new Date();
+                                    var dd = String(datumce.getDate()).padStart(2, '0');
+                                    var mm = String(datumce.getMonth() + 1).padStart(2, '0'); //Januar je 0!
+                                    var yyyy = datumce.getFullYear();
+                                    datumce = yyyy + '/' + mm + '/' + dd;
+                                    datumce = prviDanuSedmici(datumce);
+                                    for(var ii=1;ii<termin.danUSedmici;ii++)
+                                    {
+                                        datumce=sljedeciDan(datumce);
+                                    }
+                
+                                    jsonString.push(
+                                        {
+                                            id:termin.idGrupaTermina,
+                                            title:termin.naziv,
+                                            predmet:linkaniPredmetTermin.naziv,
+                                            datum:datumce,
+                                            vrijeme:termin.vrijeme,
+                                            sala:linkovaniKabinet.namjena,
+                                            trajanje:termin.trajanje,
+                                            predavac:linkovaniPredavac.ime + ' ' + linkovaniPredavac.prezime,
+                                            biljeska:biljeskica
+                                        }
+                                    );
+                                    iVarTermin++; 
+                                    if(iVarTermin==velicinaTermina)
+                                    {
+                                        res.writeHead(200, {'Content-Type': 'application/json'});        
+                                        res.end(JSON.stringify(jsonString));                         
+                                    }
+                                });
+                            });
+                        });
+                    });
+                });                                       
+            });    
+        }            
     });    
 });
 
-app.get('/getIspiti',function(req,res)
+app.get('/getIspiti/:idStudenta',function(req,res)
 {
-    var spisakIspita=[
-        {
-            id:  1,
-            title:'Usmeni ispit',
-            predmet:'Administracija racunarskih mreza',
-            datum:'2019/04/11', 
-            vrijeme:'14:30',
-            sala:'S10',
-            trajanje:'120'
-        },
-        {
-            id:  2,
-            title:'Prvi parcijalni ispit',
-            predmet:'Softver Inzinjering',
-            datum:'2019/04/11', 
-            vrijeme:'13:00',
-            sala:'MA',
-            trajanje:'90'
-        },
-        {
-            id:  3,
-            title:'Usmeni ispit',
-            predmet:'Tehnike programiranja',
-            datum:'2019/04/11', 
-            vrijeme:'17:30',
-            sala:'S9',
-            trajanje:'30'
-        },
-        {
-            id:  4,
-            title:'Prvi parcijalni ispit',
-            predmet:'Linearna algebra i geometrija',
-            datum:'2019/04/11', 
-            vrijeme:'09:30',
-            sala:'VA',
-            trajanje:'180'
-        },
-        {
-            id:  5,
-            title:'Drugi parcijalni ispit',
-            predmet:'Objektno orijentisana analiza i dizajn',
-            datum:'2019/04/12', 
-            vrijeme:'14:30',
-            sala:'S8',
-            trajanje:'120'
-        }
-    ]
-    
-    var vel=spisakIspita.length;
+    var idStudenta = 1;
 
-     
-    var jsonContent="[";
-    if(vel!=0)
-    {
-        jsonContent+="{\n";
-        jsonContent+="\"id\": ";
-        jsonContent+="\"";
-        jsonContent+=spisakIspita[0].id;
-        jsonContent+="\",";
-        jsonContent+="\n\"title\": ";
-        jsonContent+="\"";
-        jsonContent+=spisakIspita[0].title;
-        jsonContent+="\",";
-        jsonContent+="\n\"predmet\": ";
-        jsonContent+="\"";
-        jsonContent+=spisakIspita[0].predmet;
-        jsonContent+="\",";
-        jsonContent+="\n\"datum\": ";
-        jsonContent+="\"";
-        jsonContent+=spisakIspita[0].datum;
-        jsonContent+="\",";
-        jsonContent+="\n\"vrijeme\": ";
-        jsonContent+="\"";
-        jsonContent+=spisakIspita[0].vrijeme;
-        jsonContent+="\",";
-        jsonContent+="\n\"sala\": ";
-        jsonContent+="\"";
-        jsonContent+=spisakIspita[0].sala;
-        jsonContent+="\",";
-        jsonContent+="\n\"trajanje\": ";
-        jsonContent+="\"";
-        jsonContent+=spisakIspita[0].trajanje;
-        jsonContent+="\"";
-        jsonContent+="}";    
-    }
-     for(let i=1;i<vel;i++)
-    {
-        jsonContent+=",{\n";
-        jsonContent+="\"id\": ";
-        jsonContent+="\"";
-        jsonContent+=spisakIspita[i].id;
-        jsonContent+="\",";
-        jsonContent+="\n\"title\": ";
-        jsonContent+="\"";
-        jsonContent+=spisakIspita[i].title;
-        jsonContent+="\",";
-        jsonContent+="\n\"predmet\": ";
-        jsonContent+="\"";
-        jsonContent+=spisakIspita[i].predmet;
-        jsonContent+="\",";
-        jsonContent+="\n\"datum\": ";
-        jsonContent+="\"";
-        jsonContent+=spisakIspita[i].datum;
-        jsonContent+="\",";
-        jsonContent+="\n\"vrijeme\": ";
-        jsonContent+="\"";
-        jsonContent+=spisakIspita[i].vrijeme;
-        jsonContent+="\",";
-        jsonContent+="\n\"sala\": ";
-        jsonContent+="\"";
-        jsonContent+=spisakIspita[i].sala;
-        jsonContent+="\",";
-        jsonContent+="\n\"trajanje\": ";
-        jsonContent+="\"";
-        jsonContent+=spisakIspita[i].trajanje;
-        jsonContent+="\"";
-        jsonContent+="}";
-    }
-    jsonContent+="]";
-    res.writeHead(200, {'Content-Type': 'application/json'});        
-    res.end(jsonContent);  
+    var jsonString=new Array();
+    db.ispit.findAll().then(function(spisakIspitaDB){
+        var velicinaIspita=spisakIspitaDB.length-1;
+        var iVarIspit=-1;
+        if(spisakIspitaDB.length==0)
+        {
+            res.writeHead(200, {'Content-Type': 'application/json'});        
+            res.end(JSON.stringify(jsonString));             
+        }
+        else
+        {
+            spisakIspitaDB.forEach(ispit => { 
+            
+                db.predmet.findOne({where:{id:ispit.idPredmet}}).then(function(linkaniPredmetIspit){
+                    db.korisnik.findOne({where:{id:ispit.idProfesor}}).then(function(linkovaniPredavac){ 
+                        db.ispitZabiljeska.findAll({where:{idIspit:ispit.idIspit}}).then(function(linkovaneZabiljeskeIspit){
+                            db.zabiljeska.findAll({where:{idStudent:idStudenta}}).then(function(linkovaneZabiljeskeStudent){
+                                var biljeskica="";
+                                if(linkovaneZabiljeskeStudent && linkovaneZabiljeskeIspit)
+                                {
+                                    console.log(linkovaneZabiljeskeIspit);
+                                    console.log(linkovaneZabiljeskeStudent);
+                                    for(var iii=0;iii<linkovaneZabiljeskeStudent.length;iii++)
+                                    {
+                                        for(var jjj=0;jjj<linkovaneZabiljeskeIspit.length;jjj++)
+                                        {
+                                            if(linkovaneZabiljeskeStudent[iii].idZabiljeska==linkovaneZabiljeskeIspit[jjj].idZabiljeska)
+                                            {                                                
+                                                biljeskica=linkovaneZabiljeskeStudent[iii].naziv;
+                                                iii=linkovaneZabiljeskeStudent.length;
+                                                jjj=linkovaneZabiljeskeIspit.length;
+                                            }  
+                                        } 
+                                    }
+                                }
+                                
+                                var datumce = ispit.termin;
+                                var dd = String(datumce.getDate()).padStart(2, '0');
+                                var mm = String(datumce.getMonth() + 1).padStart(2, '0'); //Januar je 0!
+                                var yyyy = datumce.getFullYear();
+                                datumce = yyyy + '/' + mm + '/' + dd;
+        
+                                var a = ispit.termin;
+                                var vrijemeSati = a.getHours()+":"+a.getMinutes();
+                                jsonString.push(
+                                    {
+                                        id:ispit.idIspit,
+                                        title:ispit.tipIspita,
+                                        predmet:linkaniPredmetIspit.naziv,
+                                        datum:datumce,
+                                        vrijeme:vrijemeSati,
+                                        sala:ispit.sala,
+                                        trajanje:ispit.vrijemeTrajanja,
+                                        predavac:linkovaniPredavac.ime + ' ' + linkovaniPredavac.prezime,
+                                        biljeska:biljeskica    
+                                    }
+                                );
+                                iVarIspit++; 
+                                if(iVarIspit==velicinaIspita)
+                                {
+                                    res.writeHead(200, {'Content-Type': 'application/json'});        
+                                    res.end(JSON.stringify(jsonString));
+                                    
+                                }
+                            });
+                        });
+                    });
+                });             
+            });   
+        }             
+    });  
 });
 
 /********************************************************************** */

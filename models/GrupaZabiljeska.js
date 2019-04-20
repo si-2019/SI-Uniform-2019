@@ -1,18 +1,18 @@
 /* jshint indent: 2 */
 
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('TerminZabiljeska', {
-    idTerminZabiljeska: {
+  return sequelize.define('GrupaZabiljeska', {
+    idGrupaZabiljeska: {
       type: DataTypes.INTEGER(10),
       allowNull: false,
       primaryKey: true
     },
-    idTermin: {
+    idGrupaTermina: {
       type: DataTypes.INTEGER(10),
       allowNull: true,
       references: {
-        model: 'Termin',
-        key: 'idtermin'
+        model: 'Grupa',
+        key: 'idgrupatermina'
       }
     },
     idZabiljeska: {
@@ -24,6 +24,6 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   }, {
-    tableName: 'TerminZabiljeska'
+    tableName: 'GrupaZabiljeska'
   });
 };
