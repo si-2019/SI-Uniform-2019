@@ -157,15 +157,15 @@ app.get('/updateZabiljeska/:Zabiljeska/:idStudent/:idGrupaTermina/:ispit',functi
                                       }
                                     }
                                 ).then(function(zabiljeska){
-                                      if(zabiljeska.naziv==req.params.Zabiljeska)
+                                    if(zabiljeska.naziv==req.params.Zabiljeska)
+                                    {
+                                      jsonString=
                                       {
-                                        jsonString=
-                                        {
-                                           success:true
-                                        } 
-                                      }
-                                      res.writeHead(200, {'Content-Type': 'application/json'});        
-                                      res.end(JSON.stringify(jsonString));
+                                         success:true
+                                      } 
+                                    }
+                                    res.writeHead(200, {'Content-Type': 'application/json'});        
+                                    res.end(JSON.stringify(jsonString));
                                 });
                                 
                                 iii=linkovaneZabiljeskeStudent.length;
@@ -203,15 +203,15 @@ app.get('/updateZabiljeska/:Zabiljeska/:idStudent/:idGrupaTermina/:ispit',functi
                                       }
                                     }
                                 ).then(function(zabiljeska){
-                                      if(zabiljeska.naziv==req.params.Zabiljeska)
+                                    if(zabiljeska.naziv==req.params.Zabiljeska)
+                                    {
+                                      jsonString=
                                       {
-                                        jsonString=
-                                        {
-                                           success:true
-                                        } 
-                                      }
-                                      res.writeHead(200, {'Content-Type': 'application/json'});        
-                                      res.end(JSON.stringify(jsonString));
+                                         success:true
+                                      } 
+                                    }
+                                    res.writeHead(200, {'Content-Type': 'application/json'});        
+                                    res.end(JSON.stringify(jsonString));
                                 });
                                 
                                 iii=linkovaneZabiljeskeStudent.length;
