@@ -132,10 +132,78 @@ app.get('/updateZabiljeska/:Zabiljeska/:idStudent/:idGrupaTermina/:ispit',functi
 {
     var isTrueSet = (req.params.ispit == 'true'); 
     var jsonString={};
-
-    res.writeHead(200, {'Content-Type': 'application/json'});        
-    res.end(JSON.stringify(jsonString));
-
+    jsonString=
+    {
+       success:false
+    }  
+    if(isTrueSet)
+    {
+        db.ispitZabiljeska.findAll({where:{idIspit:req.params.idGrupaTermina}}).then(function(linkovaneZabiljeskeIspit){
+            db.zabiljeska.findAll({where:{idStudent:req.params.idStudent}}).then(function(linkovaneZabiljeskeStudent){
+                var trazeniID="";
+                if(linkovaneZabiljeskeStudent && linkovaneZabiljeskeIspit)
+                {
+                    for(var iii=0;iii<linkovaneZabiljeskeStudent.length;iii++)
+                    {
+                        for(var jjj=0;jjj<linkovaneZabiljeskeIspit.length;jjj++)
+                        {
+                            if(linkovaneZabiljeskeStudent[iii].idZabiljeska==linkovaneZabiljeskeIspit[jjj].idZabiljeska)
+                            {   
+                                linkovaneZabiljeskeStudent[iii].naziv=req.params.Zabiljeska;
+                                iii=linkovaneZabiljeskeStudent.length;
+                                jjj=linkovaneZabiljeskeIspit.length;
+                                jsonString=
+                                {
+                                   success:true
+                                }  
+                                res.writeHead(200, {'Content-Type': 'application/json'});        
+                                res.end(JSON.stringify(jsonString));
+                            }  
+                        } 
+                    }
+                }
+                else
+                {
+                    res.writeHead(200, {'Content-Type': 'application/json'});        
+                    res.end(JSON.stringify(jsonString));
+                }
+            });
+        });
+    }
+    else
+    {
+        db.grupaZabiljeska.findAll({where:{idGrupaTermina:req.params.idGrupaTermina}}).then(function(linkovaneZabiljeskeGrupa){
+            db.zabiljeska.findAll({where:{idStudent:req.params.idStudent}}).then(function(linkovaneZabiljeskeStudent){
+                var biljeskica="";
+                if(linkovaneZabiljeskeGrupa && linkovaneZabiljeskeStudent)
+                {                    
+                    for(var iii=0;iii<linkovaneZabiljeskeStudent.length;iii++)
+                    {
+                        for(var jjj=0;jjj<linkovaneZabiljeskeGrupa.length;jjj++)
+                        {
+                            if(linkovaneZabiljeskeStudent[iii].idZabiljeska==linkovaneZabiljeskeGrupa[jjj].idZabiljeska)
+                            {                                
+                                linkovaneZabiljeskeStudent[iii].naziv=req.params.Zabiljeska;
+                                iii=linkovaneZabiljeskeStudent.length;
+                                jjj=linkovaneZabiljeskeGrupa.length;
+                                jsonString=
+                                {
+                                   success:true
+                                }  
+                                res.writeHead(200, {'Content-Type': 'application/json'});        
+                                res.end(JSON.stringify(jsonString));
+                            }  
+                        } 
+                    }    
+                }
+                else
+                {
+                    res.writeHead(200, {'Content-Type': 'application/json'});        
+                    res.end(JSON.stringify(jsonString));
+                }
+            });
+        });
+    }
 })
 /*
 app.post('/deleteZabiljeska/:idTermin/:idStudent',function(req,res)
