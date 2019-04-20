@@ -149,15 +149,27 @@ app.get('/updateZabiljeska/:Zabiljeska/:idStudent/:idGrupaTermina/:ispit',functi
                         {
                             if(linkovaneZabiljeskeStudent[iii].idZabiljeska==linkovaneZabiljeskeIspit[jjj].idZabiljeska)
                             {   
-                                linkovaneZabiljeskeStudent[iii].naziv=req.params.Zabiljeska;
+                                db.zabiljeska.update({
+                                    naziv: req.params.Zabiljeska,
+                                }, {
+                                    where: {
+                                        idZabiljeska:linkovaneZabiljeskeStudent[iii].idZabiljeska
+                                      }
+                                    }
+                                ).then(function(zabiljeska){
+                                      if(zabiljeska.naziv==req.params.Zabiljeska)
+                                      {
+                                        jsonString=
+                                        {
+                                           success:true
+                                        } 
+                                      }
+                                      res.writeHead(200, {'Content-Type': 'application/json'});        
+                                      res.end(JSON.stringify(jsonString));
+                                });
+                                
                                 iii=linkovaneZabiljeskeStudent.length;
                                 jjj=linkovaneZabiljeskeIspit.length;
-                                jsonString=
-                                {
-                                   success:true
-                                }  
-                                res.writeHead(200, {'Content-Type': 'application/json'});        
-                                res.end(JSON.stringify(jsonString));
                             }  
                         } 
                     }
@@ -182,17 +194,29 @@ app.get('/updateZabiljeska/:Zabiljeska/:idStudent/:idGrupaTermina/:ispit',functi
                         for(var jjj=0;jjj<linkovaneZabiljeskeGrupa.length;jjj++)
                         {
                             if(linkovaneZabiljeskeStudent[iii].idZabiljeska==linkovaneZabiljeskeGrupa[jjj].idZabiljeska)
-                            {                                
-                                linkovaneZabiljeskeStudent[iii].naziv=req.params.Zabiljeska;
+                            {   
+                                db.zabiljeska.update({
+                                    naziv: req.params.Zabiljeska,
+                                }, {
+                                    where: {
+                                        idZabiljeska:linkovaneZabiljeskeStudent[iii].idZabiljeska
+                                      }
+                                    }
+                                ).then(function(zabiljeska){
+                                      if(zabiljeska.naziv==req.params.Zabiljeska)
+                                      {
+                                        jsonString=
+                                        {
+                                           success:true
+                                        } 
+                                      }
+                                      res.writeHead(200, {'Content-Type': 'application/json'});        
+                                      res.end(JSON.stringify(jsonString));
+                                });
+                                
                                 iii=linkovaneZabiljeskeStudent.length;
                                 jjj=linkovaneZabiljeskeGrupa.length;
-                                jsonString=
-                                {
-                                   success:true
-                                }  
-                                res.writeHead(200, {'Content-Type': 'application/json'});        
-                                res.end(JSON.stringify(jsonString));
-                            }  
+                            }   
                         } 
                     }    
                 }
