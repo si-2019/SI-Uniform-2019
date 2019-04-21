@@ -70,8 +70,6 @@ const prviDanuSedmici = (datum) => //funkcija vraca prvi dan u sedmici u kojo je
     return datum;
   }
 
-
-
 app.get('/addZabiljeska/:Zabiljeska/:idStudent/:idGrupaTermina/:ispit',function(req,res)
 {    
     var newID = parseInt(new Date().getTime().toString().substring(4));
