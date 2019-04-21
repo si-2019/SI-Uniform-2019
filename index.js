@@ -284,7 +284,49 @@ app.get('/deleteZabiljeska/:idStudent/:idGrupaTermina/:ispit',function(req,res){
     }
     else
     {
-       
+        db.grupaZabiljeska.findAll({where:{idGrupaTermina:req.params.idGrupaTermina}}).then(function(linkovaneZabiljeskeGrupa){
+            db.zabiljeska.findAll({where:{idStudent:req.params.idStudent}}).then(function(linkovaneZabiljeskeStudent){
+                var biljeskica="";
+                if(linkovaneZabiljeskeGrupa && linkovaneZabiljeskeStudent)
+                {                    
+                    for(var iii=0;iii<linkovaneZabiljeskeStudent.length;iii++)
+                    {
+                        for(var jjj=0;jjj<linkovaneZabiljeskeGrupa.length;jjj++)
+                        {
+                            if(linkovaneZabiljeskeStudent[iii].idZabiljeska==linkovaneZabiljeskeGrupa[jjj].idZabiljeska)
+                            {   
+                                db.zabiljeska.update({
+                                    naziv: "",
+                                }, {
+                                    where: {
+                                        idZabiljeska:linkovaneZabiljeskeStudent[iii].idZabiljeska
+                                      }
+                                    }
+                                ).then(function(zabiljeska){
+                                    if(zabiljeska.naziv=="")
+                                    {
+                                      jsonString=
+                                      {
+                                         success:true
+                                      } 
+                                    }
+                                    res.writeHead(200, {'Content-Type': 'application/json'});        
+                                    res.end(JSON.stringify(jsonString));
+                                });
+                                
+                                iii=linkovaneZabiljeskeStudent.length;
+                                jjj=linkovaneZabiljeskeGrupa.length;
+                            }   
+                        } 
+                    }    
+                }
+                else
+                {
+                    res.writeHead(200, {'Content-Type': 'application/json'});        
+                    res.end(JSON.stringify(jsonString));
+                }
+            });
+        });       
     }
 
 });
