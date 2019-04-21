@@ -73,6 +73,10 @@ const prviDanuSedmici = (datum) => //funkcija vraca prvi dan u sedmici u kojo je
 app.get('/addZabiljeska/:Zabiljeska/:idStudent/:idGrupaTermina/:ispit',function(req,res)
 {    
     var newID = parseInt(new Date().getTime().toString().substring(4));
+
+    db.zabiljeska.findOne({idZabiljeska:newID,naziv:req.params.Zabiljeska,idStudent:req.params.idStudent}).then(function(kd){
+        if(kd==null)
+        {            
     
     db.zabiljeska.create({idZabiljeska:newID,naziv:req.params.Zabiljeska,idStudent:req.params.idStudent}).then(function(k){            
         console.log(req.params.ispit); 
@@ -122,7 +126,24 @@ app.get('/addZabiljeska/:Zabiljeska/:idStudent/:idGrupaTermina/:ispit',function(
                     res.end(JSON.stringify(jsonString));
                 });                
             }           
-        });    
+        });
+    }
+    else
+    {
+        axios({
+            method:'get',
+            url:'http://localhost:3001/updateZabiljeska'+'/'+req.params.Zabiljeska+'/'+req.params.idStudent+'/'+req.params.idGrupaTermina+'/'+req.params.ispit,
+            responseType:'json'
+          })
+            .then(function (response) {
+              res.writeHead(200, {'Content-Type': 'application/json'});        
+              res.end(JSON.stringify(response));
+              console.log(response);
+             }); 
+    }
+    
+
+    });   
 })
 
 
