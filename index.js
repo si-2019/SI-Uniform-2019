@@ -141,8 +141,6 @@ app.get('/addZabiljeska/:Zabiljeska/:idStudent/:idGrupaTermina/:ispit',function(
               console.log(response);
              }); 
     }
-    
-
     });   
 })
 
@@ -371,6 +369,7 @@ app.post('/deleteGrupa/:idGrupe',function(req,res)
 })
 
 */
+
 
 app.get('/getTermini/:idStudenta',function(req,res)
 {
