@@ -371,6 +371,25 @@ app.post('/deleteGrupa/:idGrupe',function(req,res)
 */
 
 
+app.get('/getTermini/sala/:idSale',function(req,res)
+{
+    var jsonString=new Array();
+
+    res.writeHead(200, {'Content-Type': 'application/json'});        
+    res.end(JSON.stringify(jsonString));  
+});
+
+app.get('/getIspiti/sala/:idSale',function(req,res)
+{
+    var jsonString=new Array();
+
+    res.writeHead(200, {'Content-Type': 'application/json'});        
+    res.end(JSON.stringify(jsonString));     
+
+});
+
+
+
 app.get('/getTermini/:idStudenta',function(req,res)
 {
     //ruta vraca sedmicne termine za odredjenog studenta
