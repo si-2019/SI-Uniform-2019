@@ -1,0 +1,28 @@
+{
+  "name": "si-uniform-2019",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/si-2019/SI-Uniform-2019.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/si-2019/SI-Uniform-2019/issues"
+  },
+  "homepage": "https://github.com/si-2019/SI-Uniform-2019#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "express-fileupload": "^1.1.4",
+    "mysql2": "^1.6.5",
+    "pug": "^2.0.3",
+    "sequelize": "^5.3.5"
+  }
+}
