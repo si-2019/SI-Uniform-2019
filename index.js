@@ -13,7 +13,6 @@ db.sequelize.sync().then(function(){
 }).catch(function(err){
     console.log("Nije uspjesno povezano sa bazom");
     console.log(err);
-
  });
 
 
