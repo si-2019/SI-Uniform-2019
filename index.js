@@ -73,7 +73,7 @@ app.get('/addZabiljeska/:Zabiljeska/:idStudent/:idGrupaTermina/:ispit',function(
 {    
     var newID = parseInt(new Date().getTime().toString().substring(4));
 
-    db.zabiljeska.findOne({idZabiljeska:newID,naziv:req.params.Zabiljeska,idStudent:req.params.idStudent}).then(function(kd){
+    db.zabiljeska.findOne({where:{idZabiljeska:newID,naziv:req.params.Zabiljeska,idStudent:req.params.idStudent}}).then(function(kd){
         if(kd==null)
         {            
     
@@ -136,7 +136,7 @@ app.get('/addZabiljeska/:Zabiljeska/:idStudent/:idGrupaTermina/:ispit',function(
           })
             .then(function (response) {
               res.writeHead(200, {'Content-Type': 'application/json'});        
-              res.end(JSON.stringify(response));
+              res.end(response);
               console.log(response);
              }); 
     }
