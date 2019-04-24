@@ -373,7 +373,7 @@ app.post('/deleteGrupa/:idGrupe',function(req,res)
 app.get('/getTermini/sala/:idStudent/:idSale',function(req,res)
 {
     var idSale= parseInt(req.params.idSale);
-    idSale = 1;
+    idSale = 9;
 
     var idStudenta = parseInt(req.params.idStudenta);
     idStudenta = 1;
@@ -460,19 +460,92 @@ app.get('/getTermini/sala/:idStudent/:idSale',function(req,res)
                 });                                       
             });    
         }            
-    });    
-
-    res.writeHead(200, {'Content-Type': 'application/json'});        
-    res.end(JSON.stringify(jsonString));  
+    });     
 });
 
-app.get('/getIspiti/sala/:idSale',function(req,res)
+app.get('/getIspiti/sala/:idStudent/:idSale',function(req,res)
 {
+    var idSale= parseInt(req.params.idSale);
+    idSale = 9;
+
+    var idStudenta = parseInt(req.params.idStudenta);
+    idStudenta = 1;
     var jsonString=new Array();
 
-    res.writeHead(200, {'Content-Type': 'application/json'});        
-    res.end(JSON.stringify(jsonString));     
-
+    db.ispit.findAll().then(function(spisakIspitaDB){
+        var velicinaIspita=spisakIspitaDB.length-1;
+        var iVarIspit=-1;
+        if(spisakIspitaDB.length==0)
+        {
+            res.writeHead(200, {'Content-Type': 'application/json'});        
+            res.end(JSON.stringify(jsonString));             
+        }
+        else
+        {
+            spisakIspitaDB.forEach(ispit => { 
+            
+                db.predmet.findOne({where:{id:ispit.idPredmet}}).then(function(linkaniPredmetIspit){
+                    db.korisnik.findOne({where:{id:ispit.idProfesor}}).then(function(linkovaniPredavac){ 
+                        db.ispitZabiljeska.findAll({where:{idIspit:ispit.idIspit}}).then(function(linkovaneZabiljeskeIspit){
+                            db.zabiljeska.findAll({where:{idStudent:idStudenta}}).then(function(linkovaneZabiljeskeStudent){
+                                db.kabinet.findOne({where:{idKabinet:idSale}}).then(function(linkovaniKabinet){ 
+                                    if(linkovaniKabinet.namjena==ispit.sala)
+                                    {
+                                        var biljeskica="";
+                                        if(linkovaneZabiljeskeStudent && linkovaneZabiljeskeIspit)
+                                        {
+                                            for(var iii=0;iii<linkovaneZabiljeskeStudent.length;iii++)
+                                            {
+                                                for(var jjj=0;jjj<linkovaneZabiljeskeIspit.length;jjj++)
+                                                {
+                                                    if(linkovaneZabiljeskeStudent[iii].idZabiljeska==linkovaneZabiljeskeIspit[jjj].idZabiljeska)
+                                                    {                                                
+                                                        biljeskica=linkovaneZabiljeskeStudent[iii].naziv;
+                                                        iii=linkovaneZabiljeskeStudent.length;
+                                                        jjj=linkovaneZabiljeskeIspit.length;
+                                                    }  
+                                                } 
+                                            }
+                                        }
+                                        
+                                        var datumce = ispit.termin;
+                                        var dd = String(datumce.getDate()).padStart(2, '0');
+                                        var mm = String(datumce.getMonth() + 1).padStart(2, '0'); //Januar je 0!
+                                        var yyyy = datumce.getFullYear();
+                                        datumce = yyyy + '/' + mm + '/' + dd;
+                   
+                                        var a = ispit.termin;
+                                        var vrijemeSati = a.getHours()+":"+a.getMinutes();
+                                        jsonString.push(
+                                            {
+                                                id:ispit.idIspit,
+                                                title:ispit.tipIspita,
+                                                predmet:linkaniPredmetIspit.naziv,
+                                                datum:datumce,
+                                                vrijeme:vrijemeSati,
+                                                sala:ispit.sala,
+                                                trajanje:ispit.vrijemeTrajanja,
+                                                predavac:linkovaniPredavac.ime + ' ' + linkovaniPredavac.prezime,
+                                                biljeska:biljeskica,
+                                                ispit:true    
+                                            }
+                                        );
+                                    }  
+                                    
+                                    iVarIspit++; 
+                                    if(iVarIspit==velicinaIspita)
+                                    {
+                                        res.writeHead(200, {'Content-Type': 'application/json'});        
+                                        res.end(JSON.stringify(jsonString));                                        
+                                    }
+                                });
+                            });
+                        });
+                    });
+                });             
+            });   
+        }             
+    }); 
 });
 
 
