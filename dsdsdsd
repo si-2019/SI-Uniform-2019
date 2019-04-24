@@ -1,0 +1,131 @@
+[33mcommit d83575cede05d7d22b13f6c3ab689e6f892c618b[m[33m ([m[1;36mHEAD -> [m[1;32mAdnanG_Sprint2_27[m[33m)[m
+Author: gobathegreat <agobeljic1@etf.unsa.ba>
+Date:   Wed Apr 24 04:07:01 2019 +0200
+
+    Inicijalni commit
+
+[33mcommit d2de2abfb838173d0aeb22fc905c14c30e789a2d[m[33m ([m[1;32mAdnanG_Sprint2_117[m[33m)[m
+Author: gobathegreat <agobeljic1@etf.unsa.ba>
+Date:   Sun Apr 21 14:09:59 2019 +0200
+
+    Kreirane rute sa dummy podacima
+
+[33mcommit a5ecd911c9175c8ed702decd613c2db1b06a8bbe[m
+Author: gobathegreat <agobeljic1@etf.unsa.ba>
+Date:   Sun Apr 21 14:06:25 2019 +0200
+
+    Inicijalni commit
+
+[33mcommit fab94f1fdff9bdbe7b8554c377951f117cc31d69[m
+Author: gobathegreat <agobeljic1@etf.unsa.ba>
+Date:   Sun Apr 21 02:52:32 2019 +0200
+
+    Doradjen bug
+
+[33mcommit 61f5238891c84619ae675d9e6819df3c103d8942[m
+Author: gobathegreat <agobeljic1@etf.unsa.ba>
+Date:   Sun Apr 21 02:10:59 2019 +0200
+
+    zavrsen us
+
+[33mcommit 1fa054f7aa245a96b9161096639fc658d0b29030[m
+Author: gobathegreat <agobeljic1@etf.unsa.ba>
+Date:   Sun Apr 21 02:03:34 2019 +0200
+
+    ruta za brisanje radi
+
+[33mcommit 991d175106927569c18b17417276795dcb2cb33e[m
+Author: gobathegreat <agobeljic1@etf.unsa.ba>
+Date:   Sun Apr 21 01:47:58 2019 +0200
+
+    ruta za brisanje radi za ispite
+
+[33mcommit f61bdf0b62655719b234089aba13f46c8163a488[m
+Author: gobathegreat <agobeljic1@etf.unsa.ba>
+Date:   Sun Apr 21 01:39:28 2019 +0200
+
+    Vraca dummy ruta za brisanje
+
+[33mcommit bca025c6b1fec1a64c45f5ee6148a3111794c5c2[m
+Author: gobathegreat <agobeljic1@etf.unsa.ba>
+Date:   Sun Apr 21 01:38:27 2019 +0200
+
+    Kreirana ruta za brisanje
+
+[33mcommit a0b17d5e1957ceea0ce018060ad7d18b3b4f0c9e[m
+Author: gobathegreat <agobeljic1@etf.unsa.ba>
+Date:   Sun Apr 21 01:26:27 2019 +0200
+
+    Inicijalni commit
+
+[33mcommit 3f243964b5445c1ef33e2d7dce11087923c060e4[m[33m ([m[1;31morigin/AdnanG_Sprint1_101[m[33m)[m
+Author: gobathegreat <agobeljic1@etf.unsa.ba>
+Date:   Sun Apr 21 01:16:18 2019 +0200
+
+    Zavrsen us
+
+[33mcommit 3e1c9d5ae68bca13feed146925c3fa82b8bb231d[m
+Author: gobathegreat <agobeljic1@etf.unsa.ba>
+Date:   Sun Apr 21 01:11:16 2019 +0200
+
+    Radi ali fali estetike
+
+[33mcommit b932ee6df41930408df261c5946f83ac59db6309[m
+Author: gobathegreat <agobeljic1@etf.unsa.ba>
+Date:   Sun Apr 21 00:54:30 2019 +0200
+
+    Bekend radi ali ne u skladu sa frontendom
+
+[33mcommit 9c0b5d6e0f562e5a5240192865095bb5fdb3af18[m
+Author: gobathegreat <agobeljic1@etf.unsa.ba>
+Date:   Sun Apr 21 00:30:21 2019 +0200
+
+    Funkcionalna ruta
+
+[33mcommit 5288471d19a3215da6df6a05410a5a213d32eb80[m
+Author: gobathegreat <agobeljic1@etf.unsa.ba>
+Date:   Sun Apr 21 00:25:58 2019 +0200
+
+    Definisana ruta
+
+[33mcommit a90648bbdf261ccc1c83735b3a89674b6125a5cb[m
+Author: gobathegreat <agobeljic1@etf.unsa.ba>
+Date:   Sun Apr 21 00:21:52 2019 +0200
+
+    Pocetni commit
+
+[33mcommit 886c0aa07c87dfb1e092ebac7e6863bd492f02c4[m[33m ([m[1;31morigin/AdnanG_Sprint1_26[m[33m)[m
+Author: gobathegreat <agobeljic1@etf.unsa.ba>
+Date:   Sat Apr 20 03:02:46 2019 +0200
+
+    Zavrsen us
+
+[33mcommit 3055c4d3f7d8cdbc6551c60e983a3c6d60ad5ea4[m
+Author: gobathegreat <agobeljic1@etf.unsa.ba>
+Date:   Sat Apr 20 03:01:58 2019 +0200
+
+    Rute vracaju termine preko id-eva drugih tabela
+
+[33mcommit 20924d3234e158a5e804c02616fb8dda6ecc29eb[m
+Author: gobathegreat <agobeljic1@etf.unsa.ba>
+Date:   Sat Apr 20 03:00:39 2019 +0200
+
+    Poluprilagodjen bekend bazi
+
+[33mcommit 3cd31372c70f4e78fa7042b3bd1a769fcbd2af85[m
+Author: gobathegreat <agobeljic1@etf.unsa.ba>
+Date:   Sat Apr 20 02:59:29 2019 +0200
+
+    dodane i kreirane rute
+
+[33mcommit afd5269143f8a4e659d32f01488caea0a1291915[m
+Author: gobathegreat <agobeljic1@etf.unsa.ba>
+Date:   Sat Apr 20 02:57:37 2019 +0200
+
+    Inicijalni bekend
+
+[33mcommit 4d60b469e96cfb9d65dfea09fe1eb6da28e77435[m
+Author: gobathegreat <agobeljic1@etf.unsa.ba>
+Date:   Sat Apr 6 01:11:44 2019 +0200
+
+    first commit
