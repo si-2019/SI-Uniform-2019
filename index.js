@@ -396,7 +396,7 @@ app.get('/getTermini/sala/:idStudent/:idSale',function(req,res)
                         db.kabinet.findOne({where:{idKabinet:termin.idKabinet}}).then(function(linkovaniKabinet){ 
                             db.grupaZabiljeska.findAll({where:{idGrupaTermina:termin.idGrupaTermina}}).then(function(linkovaneZabiljeskeGrupa){
                                 db.zabiljeska.findAll({where:{idStudent:idStudenta}}).then(function(linkovaneZabiljeskeStudent){
-                                    if(linkovaniKabinet.idKabinet!=idSale)
+                                    if(linkovaniKabinet.idKabinet==idSale)
                                     {
                                         var biljeskica="";
                                         if(linkovaneZabiljeskeGrupa && linkovaneZabiljeskeStudent)
