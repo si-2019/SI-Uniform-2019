@@ -275,6 +275,7 @@ app.get('/deleteZabiljeska/:idStudent/:idGrupaTermina/:ispit',function(req,res){
                                       }
                                     }
                                 ).then(function(zabiljeska){
+                                    console.log(zabiljeska);
                                     if(zabiljeska.naziv=="")
                                     {
                                       jsonString=
