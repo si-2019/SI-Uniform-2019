@@ -370,10 +370,13 @@ app.post('/deleteGrupa/:idGrupe',function(req,res)
 */
 
 
-app.get('/getTermini/sala/:idSale',function(req,res)
+app.get('/getTermini/sala/:idStudent/:idSale',function(req,res)
 {
     var idSale= parseInt(req.params.idSale);
     idSale = 1;
+
+    var idStudenta = parseInt(req.params.idStudenta);
+    idStudenta = 1;
 
     
     var jsonString=new Array();
@@ -393,53 +396,57 @@ app.get('/getTermini/sala/:idSale',function(req,res)
                         db.kabinet.findOne({where:{idKabinet:termin.idKabinet}}).then(function(linkovaniKabinet){ 
                             db.grupaZabiljeska.findAll({where:{idGrupaTermina:termin.idGrupaTermina}}).then(function(linkovaneZabiljeskeGrupa){
                                 db.zabiljeska.findAll({where:{idStudent:idStudenta}}).then(function(linkovaneZabiljeskeStudent){
-                                    var biljeskica="";
-                                    if(linkovaneZabiljeskeGrupa && linkovaneZabiljeskeStudent)
+                                    if(linkovaniKabinet.idKabinet!=idSale)
                                     {
-                                        
-                                        for(var iii=0;iii<linkovaneZabiljeskeStudent.length;iii++)
+                                        var biljeskica="";
+                                        if(linkovaneZabiljeskeGrupa && linkovaneZabiljeskeStudent)
                                         {
-                                            for(var jjj=0;jjj<linkovaneZabiljeskeGrupa.length;jjj++)
+                                            
+                                            for(var iii=0;iii<linkovaneZabiljeskeStudent.length;iii++)
                                             {
-                                                if(linkovaneZabiljeskeStudent[iii].idZabiljeska==linkovaneZabiljeskeGrupa[jjj].idZabiljeska)
+                                                for(var jjj=0;jjj<linkovaneZabiljeskeGrupa.length;jjj++)
                                                 {
-                                                    
-                                                    biljeskica=linkovaneZabiljeskeStudent[iii].naziv;
-                                                    iii=linkovaneZabiljeskeStudent.length;
-                                                    jjj=linkovaneZabiljeskeGrupa.length;
-                                                }  
-                                            } 
+                                                    if(linkovaneZabiljeskeStudent[iii].idZabiljeska==linkovaneZabiljeskeGrupa[jjj].idZabiljeska)
+                                                    {
+                                                        
+                                                        biljeskica=linkovaneZabiljeskeStudent[iii].naziv;
+                                                        iii=linkovaneZabiljeskeStudent.length;
+                                                        jjj=linkovaneZabiljeskeGrupa.length;
+                                                    }  
+                                                } 
+                                            }
+    
                                         }
-
+                                        
+    
+    
+                                        var datumce = new Date();
+                                        var dd = String(datumce.getDate()).padStart(2, '0');
+                                        var mm = String(datumce.getMonth() + 1).padStart(2, '0'); //Januar je 0!
+                                        var yyyy = datumce.getFullYear();
+                                        datumce = yyyy + '/' + mm + '/' + dd;
+                                        datumce = prviDanuSedmici(datumce);
+                                        for(var ii=1;ii<termin.danUSedmici;ii++)
+                                        {
+                                            datumce=sljedeciDan(datumce);
+                                        }
+                    
+                                        jsonString.push(
+                                            {
+                                                id:termin.idGrupaTermina,
+                                                title:termin.naziv,
+                                                predmet:linkaniPredmetTermin.naziv,
+                                                datum:datumce,
+                                                vrijeme:termin.vrijeme,
+                                                sala:linkovaniKabinet.namjena,
+                                                trajanje:termin.trajanje,
+                                                predavac:linkovaniPredavac.ime + ' ' + linkovaniPredavac.prezime,
+                                                biljeska:biljeskica,
+                                                ispit:false
+                                            }
+                                        );
                                     }
                                     
-
-
-                                    var datumce = new Date();
-                                    var dd = String(datumce.getDate()).padStart(2, '0');
-                                    var mm = String(datumce.getMonth() + 1).padStart(2, '0'); //Januar je 0!
-                                    var yyyy = datumce.getFullYear();
-                                    datumce = yyyy + '/' + mm + '/' + dd;
-                                    datumce = prviDanuSedmici(datumce);
-                                    for(var ii=1;ii<termin.danUSedmici;ii++)
-                                    {
-                                        datumce=sljedeciDan(datumce);
-                                    }
-                
-                                    jsonString.push(
-                                        {
-                                            id:termin.idGrupaTermina,
-                                            title:termin.naziv,
-                                            predmet:linkaniPredmetTermin.naziv,
-                                            datum:datumce,
-                                            vrijeme:termin.vrijeme,
-                                            sala:linkovaniKabinet.namjena,
-                                            trajanje:termin.trajanje,
-                                            predavac:linkovaniPredavac.ime + ' ' + linkovaniPredavac.prezime,
-                                            biljeska:biljeskica,
-                                            ispit:false
-                                        }
-                                    );
                                     iVarTermin++; 
                                     if(iVarTermin==velicinaTermina)
                                     {
