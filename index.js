@@ -229,8 +229,7 @@ app.get('/updateZabiljeska/:Zabiljeska/:idStudent/:idGrupaTermina/:ispit',functi
                                     }
                                     res.writeHead(200, {'Content-Type': 'application/json'});        
                                     res.end(JSON.stringify(jsonString));
-                                });
-                                
+                                });                                
                                 iii=linkovaneZabiljeskeStudent.length;
                                 jjj=linkovaneZabiljeskeGrupa.length;
                             }   
