@@ -575,8 +575,8 @@ app.get('/getPredmet/:predmetID',function(req,res)
 
 
 
-app.listen(3001);
-console.log("Server running on localhost:3001");
+app.listen(31920);
+console.log("Server running on localhost:31920");
 
 
 
