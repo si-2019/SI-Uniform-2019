@@ -71,8 +71,53 @@ const prviDanuSedmici = (datum) => //funkcija vraca prvi dan u sedmici u kojo je
 
 app.get('/addZabiljeska/:Zabiljeska/:idStudent/:idGrupaTermina/:ispit',function(req,res)
 {    
-    res.writeHead(200, {'Content-Type': 'application/json'});        
-    res.end(JSON.stringify({success:false}));  
+    var isTrueSet = (req.params.ispit.toString() == 'true');
+    
+    db.zabiljeska.findOne({where:{idZabiljeska:newID,naziv:req.params.Zabiljeska,idStudent:req.params.idStudent}}).then(function(kd){
+        if(kd==null)
+        {  
+             
+    
+    db.zabiljeska.create({idZabiljeska:newID,naziv:req.params.Zabiljeska,idStudent:req.params.idStudent}).then(function(k){            
+          
+        if(isTrueSet)
+            {
+                db.ispitZabiljeska.create({idIspitZabiljeska:newID,idIspit:req.params.idGrupaTermina,idZabiljeska:k.idZabiljeska}).then(function(link){
+                    var jsonString;
+                    if(k!=null && link!=null)
+                    {
+                        jsonString=
+                        {
+                            success:true
+                        }            
+                    }
+                    else
+                    {
+                        jsonString=
+                        {
+                            success:false
+                        }
+                    }
+                    res.writeHead(200, {'Content-Type': 'application/json'});        
+                    res.end(JSON.stringify(jsonString));                    
+                })
+            }
+            else
+            {
+                               
+            }           
+        }).catch(function(){
+            res.writeHead(200, {'Content-Type': 'application/json'});        
+            res.end(JSON.stringify({success:false}));
+        });
+    }
+    else
+    {
+        
+    }
+    
+
+    })
 })
 
 
