@@ -11,7 +11,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER(4),
       allowNull: true
     },
-    namjena: {
+    naziv: {
       type: DataTypes.STRING(10),
       allowNull: true
     }
