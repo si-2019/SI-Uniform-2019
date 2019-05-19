@@ -667,7 +667,13 @@ app.get('/getProfesorIspiti/:idStudenta',function(req,res)
 
     var jsonString=new Array();
     db.ispit.findAll().then(function(spisakIspitaDB){
-        
+        var velicinaIspita=spisakIspitaDB.length-1;
+        var iVarIspit=-1;
+        if(spisakIspitaDB.length==0)
+        {
+            res.writeHead(200, {'Content-Type': 'application/json'});        
+            res.end(JSON.stringify(jsonString));             
+        }
         else
         {
             spisakIspitaDB.forEach(ispit => { 
