@@ -642,9 +642,23 @@ app.get('/getProfesorTermini/:idProfesor',function(req,res)
                                         datumce=sljedeciDan(datumce);
                                     }
 
-                                    
-                
-                                    
+                                    if(termin.idPredavac==idProfesora)
+                                    {
+                                        jsonString.push(
+                                            { 
+                                                id:termin.idGrupaTermina,
+                                                title:termin.naziv,
+                                                predmet:linkaniPredmetTermin.naziv,
+                                                datum:datumce,
+                                                vrijeme:termin.vrijeme,
+                                                sala:linkovaniKabinet.naziv,
+                                                trajanje:termin.trajanje,
+                                                predavac:linkovaniPredavac.ime + ' ' + linkovaniPredavac.prezime,
+                                                biljeska:biljeskica,
+                                                ispit:false
+                                            }
+                                        );
+                                    }
                                     iVarTermin++; 
                                     if(iVarTermin==velicinaTermina)
                                     {
