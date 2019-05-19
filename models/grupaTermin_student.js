@@ -22,7 +22,11 @@ module.exports = function(sequelize, DataTypes) {
         model: 'Korisnik',
         key: 'idkorisnik'
       }
-    }
+    },
+    datumPrijave: {
+      type: DataTypes.DATEONLY,
+      allowNull: true
+    },
   }, {
     tableName: 'grupaTermin_student'
   });

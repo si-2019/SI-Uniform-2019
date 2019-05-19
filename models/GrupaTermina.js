@@ -46,6 +46,10 @@ module.exports = function(sequelize, DataTypes) {
     trajanje: {
       type: DataTypes.INTEGER(10),
       allowNull: true
+    },
+    rokPrijave: {
+      type: DataTypes.DATE,
+      allowNull: true
     }
   }, {
     tableName: 'GrupaTermina'
