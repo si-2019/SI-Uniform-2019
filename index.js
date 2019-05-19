@@ -71,7 +71,8 @@ const prviDanuSedmici = (datum) => //funkcija vraca prvi dan u sedmici u kojo je
 
 app.get('/addZabiljeska/:Zabiljeska/:idStudent/:idGrupaTermina/:ispit',function(req,res)
 {    
-      
+    res.writeHead(200, {'Content-Type': 'application/json'});        
+    res.end(JSON.stringify({success:false}));  
 })
 
 
