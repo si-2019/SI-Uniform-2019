@@ -751,6 +751,20 @@ app.get('/getProfesorIspiti/:idStudenta',function(req,res)
 
                                 if(linkaniPredmetIspit.idAsistent==idProfesora || linkaniPredmetIspit.idProfesor==idProfesora)
                                 {
+                                    jsonString.push(
+                                    {
+                                        id:ispit.idIspit,
+                                        title:tipIspita,
+                                        predmet:linkaniPredmetIspit.naziv,
+                                        datum:datumce,
+                                        vrijeme:vrijemeSati,
+                                        sala:sala,
+                                        trajanje:trajanje,
+                                        predavac:linkovaniPredavac.ime + ' ' + linkovaniPredavac.prezime,
+                                        biljeska:biljeskica,
+                                        ispit:true    
+                                    }
+                                );
                                     
                                 }
                                 iVarIspit++; 
