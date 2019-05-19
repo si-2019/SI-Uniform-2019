@@ -594,7 +594,13 @@ app.get('/getProfesorTermini/:idProfesor',function(req,res)
 
     var jsonString=new Array();
     db.grupaTermina.findAll().then(function(spisakTerminaDB){
-        
+        var velicinaTermina=spisakTerminaDB.length-1;
+        var iVarTermin=-1;
+        if(spisakTerminaDB.length==0)
+        {
+            res.writeHead(200, {'Content-Type': 'application/json'});        
+            res.end(JSON.stringify(jsonString));             
+        }
         else
         {
             spisakTerminaDB.forEach(termin => {                 
