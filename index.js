@@ -100,6 +100,9 @@ app.get('/addZabiljeska/:Zabiljeska/:idStudent/:idGrupaTermina/:ispit',function(
                     }
                     res.writeHead(200, {'Content-Type': 'application/json'});        
                     res.end(JSON.stringify(jsonString));                    
+                }).catch(function(){
+                    res.writeHead(200, {'Content-Type': 'application/json'});        
+                    res.end(JSON.stringify({success:false}));
                 })
             }
             else
@@ -147,11 +150,16 @@ app.get('/addZabiljeska/:Zabiljeska/:idStudent/:idGrupaTermina/:ispit',function(
              }).catch(function(){
                 res.writeHead(200, {'Content-Type': 'application/json'});        
                 res.end(JSON.stringify({success:false}));
-            }); 
+            });
+            
     }
     
+    }).catch(function(){
+        res.writeHead(200, {'Content-Type': 'application/json'});        
+        res.end(JSON.stringify({success:false}));
+    });   
+    
 
-    })
 })
 
 
