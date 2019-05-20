@@ -136,7 +136,18 @@ app.get('/addZabiljeska/:Zabiljeska/:idStudent/:idGrupaTermina/:ispit',function(
     }
     else
     {
-        
+        axios({
+            method:'get',
+            url:'http://localhost:31920/updateZabiljeska'+'/'+req.params.Zabiljeska+'/'+req.params.idStudent+'/'+req.params.idGrupaTermina+'/'+req.params.ispit,
+            responseType:'json'
+          })
+            .then(function (response) {
+              res.writeHead(200, {'Content-Type': 'application/json'});        
+              res.end(JSON.stringify(response));
+             }).catch(function(){
+                res.writeHead(200, {'Content-Type': 'application/json'});        
+                res.end(JSON.stringify({success:false}));
+            }); 
     }
     
 
