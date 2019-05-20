@@ -104,6 +104,29 @@ app.get('/addZabiljeska/:Zabiljeska/:idStudent/:idGrupaTermina/:ispit',function(
             }
             else
             {
+                db.grupaZabiljeska.create({idGrupaZabiljeska:newID,idGrupaTermina:req.params.idGrupaTermina,idZabiljeska:k.idZabiljeska}).then(function(link){
+                    
+                    var jsonString;
+                    if(k!=null && link!=null)
+                    {
+                        jsonString=
+                        {
+                            success:true
+                        }            
+                    }
+                    else
+                    {
+                        jsonString=
+                        {
+                            success:false
+                        }
+                    }
+                    res.writeHead(200, {'Content-Type': 'application/json'});        
+                    res.end(JSON.stringify(jsonString));
+                }).catch(function(){
+                    res.writeHead(200, {'Content-Type': 'application/json'});        
+                    res.end(JSON.stringify({success:false}));
+                }); 
                                
             }           
         }).catch(function(){
