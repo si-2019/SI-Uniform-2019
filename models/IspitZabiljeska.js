@@ -2,11 +2,7 @@
 
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('IspitZabiljeska', {
-    idIspitZabiljeska: {
-      type: DataTypes.INTEGER(10),
-      allowNull: false,
-      primaryKey: true
-    },
+  
     idIspit: {
       type: DataTypes.INTEGER(10),
       allowNull: true,
