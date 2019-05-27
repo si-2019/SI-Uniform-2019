@@ -2,7 +2,19 @@
 
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('Materijal', {
-    
+    idMaterijal: {
+      type: DataTypes.INTEGER(10),
+      allowNull: false,
+      primaryKey: true
+    },
+    idPredmet: {
+      type: DataTypes.INTEGER(10),
+      allowNull: false,
+      references: {
+        model: 'Predmet',
+        key: 'idpredmet'
+      }
+    },
     idTipMaterijala: {
       type: DataTypes.INTEGER(10),
       allowNull: false,
