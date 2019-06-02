@@ -7,14 +7,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       primaryKey: true
     },
-    idKorisnik: {
-      type: DataTypes.INTEGER(10),
-      allowNull: true,
-      references: {
-        model: 'Korisnik',
-        key: 'idkorisnik'
-      }
-    },
+    
     idPredmet: {
       type: DataTypes.INTEGER(10),
       allowNull: true,
