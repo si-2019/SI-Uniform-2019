@@ -1356,7 +1356,7 @@ app.post("/dodajStudentaRandomGroup/:idStudent",function(req,res)
     })
 });
 
-
+swagger_document(app);
 
 app.listen(PORT, function(){ console.log('server successfully started on port '+PORT); });
 
