@@ -7,6 +7,7 @@ var upload = require('express-fileupload');
 var cors = require('cors');
 const db = require('./models/db.js');
 var axios=require('axios');
+const swagger_document=require('./swagger-document.js');
 var PORT = process.env.PORT || 31920;
 
 db.sequelize.sync().then(function(){
