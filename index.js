@@ -7,7 +7,6 @@ var upload = require('express-fileupload');
 var cors = require('cors');
 const db = require('./models/db.js');
 var axios=require('axios');
-const swagger_document=require('./swagger-document.js');
 var PORT = process.env.PORT || 31920;
 
 db.sequelize.sync().then(function(){
@@ -1357,7 +1356,7 @@ app.post("/dodajStudentaRandomGroup/:idStudent",function(req,res)
     })
 });
 
-swagger_document(app);
+
 
 app.listen(PORT, function(){ console.log('server successfully started on port '+PORT); });
 
