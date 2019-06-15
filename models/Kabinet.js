@@ -14,6 +14,10 @@ module.exports = function(sequelize, DataTypes) {
     naziv: {
       type: DataTypes.STRING(10),
       allowNull: true
+    },
+    namjena: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true
     }
   }, {
     tableName: 'Kabinet'
