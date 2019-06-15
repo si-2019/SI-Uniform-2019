@@ -146,7 +146,7 @@ app.get('/addZabiljeska/:Zabiljeska/:idStudent/:idGrupaTermina/:ispit',function(
     {
         axios({
             method:'get',
-            url:'http://si2019uniform.herokuapp.com/updateZabiljeska'+'/'+req.params.Zabiljeska+'/'+req.params.idStudent+'/'+req.params.idGrupaTermina+'/'+req.params.ispit,
+            url:'https://si2019uniform.herokuapp.com/updateZabiljeska'+'/'+req.params.Zabiljeska+'/'+req.params.idStudent+'/'+req.params.idGrupaTermina+'/'+req.params.ispit,
             responseType:'json'
           })
             .then(function (response) {
