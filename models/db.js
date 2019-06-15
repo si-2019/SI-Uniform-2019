@@ -17,7 +17,7 @@ db.grupaTermina = sequelize.import(__dirname+'/GrupaTermina.js');
 db.ispit = sequelize.import(__dirname+'/Ispit.js');
 db.grupaZabiljeska = sequelize.import(__dirname+'/GrupaZabiljeska.js');
 db.ispitZabiljeska = sequelize.import(__dirname+'/IspitZabiljeska.js');
-db.grupaTermin_student = sequelize.import(__dirname+'/GrupaTermin_student.js');
+db.grupaTermin_student = sequelize.import(__dirname+'/grupaTermin_student.js');
 db.predmet_student = sequelize.import(__dirname+'/predmet_student.js');
 db.redoslijed = sequelize.import(__dirname+'/Redoslijed.js');
 
