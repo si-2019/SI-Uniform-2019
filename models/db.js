@@ -1,9 +1,9 @@
 
 const Sequelize = require("sequelize");
-/*const sequelize = new Sequelize("TYQcLL35gV","TYQcLL35gV","BLysSj9ZrP",{host:'37.59.55.185',dialect:"mysql",timezone: '+01:00',define: {
+const sequelize = new Sequelize("TYQcLL35gV","TYQcLL35gV","BLysSj9ZrP",{host:'37.59.55.185',dialect:"mysql",timezone: '+01:00',define: {
     timestamps: false
 }
-});*/
+});
 
 const db = {}
 /*
