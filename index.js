@@ -7,7 +7,7 @@ var upload = require('express-fileupload');
 var cors = require('cors');
 const db = require('./models/db.js');
 var axios=require('axios');
-var PORT = process.env.PORT || 31920;
+var port = process.env.PORT || 31920;
 
 db.sequelize.sync().then(function(){
    console.log("Uspjesno povezano sa bazom");
@@ -1358,7 +1358,7 @@ app.post("/dodajStudentaRandomGroup/:idStudent",function(req,res)
 
 */
 
-app.listen(PORT, function(){ console.log('server successfully started on port '+PORT); });
+app.listen(port, function(){ console.log('server successfully started on port '+port); });
 
 
 
