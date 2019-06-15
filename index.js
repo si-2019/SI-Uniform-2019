@@ -4,8 +4,8 @@ var fs = require('fs');
 /*var pug = require('pug');                         -------------*/
 var bodyParser = require('body-parser');
 /*var upload = require('express-fileupload');       -------------*/
-var cors = require('cors');
-/*var axios=require('axios');*/
+/*var cors = require('cors')                        -------------*/;
+var axios=require('axios');
 var port = process.env.PORT || 31920;
 /*
 db.sequelize.sync().then(function(){
