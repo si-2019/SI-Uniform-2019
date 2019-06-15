@@ -11,6 +11,7 @@
     "type": "git",
     "url": "git+https://github.com/si-2019/SI-Uniform-2019.git"
   },
+  "devDependencies": {},
   "author": "",
   "license": "ISC",
   "bugs": {
