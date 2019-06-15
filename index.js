@@ -36,7 +36,7 @@ app.get('/',function(req,res)
 app.listen(port, function(){ console.log('server successfully started on port '+port); });
 
 
-/*
+
 const sljedeciDan = (datum) =>// funkcija vraca datum sljedeceg dana
 {
   var today = new Date(datum);
@@ -1366,7 +1366,7 @@ app.post("/dodajStudentaRandomGroup/:idStudent",function(req,res)
     })
 });
 
-*/
+
 
 
 
