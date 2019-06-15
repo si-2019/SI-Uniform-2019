@@ -1,30 +1,6 @@
 var express = require('express');
-var path = require('path');
-var fs = require('fs');
-var pug = require('pug');/** */
-var bodyParser = require('body-parser');
-var upload = require('express-fileupload');
-var cors = require('cors');
-var axios=require('axios');
-var port = process.env.PORT || 31920;
-/*
-db.sequelize.sync().then(function(){
-   console.log("Uspjesno povezano sa bazom");
-}).catch(function(err){
-    console.log("Nije uspjesno povezano sa bazom");
-    console.log(err);
- });
-
-*/
 
 var app = express();
-app.use(upload());
-app.use(cors());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static('public'));
-app.set('views',path.join(__dirname+"/public/",'views'));
-app.set('view engine', 'pug');
 
 app.get('/',function(req,res)
 {
