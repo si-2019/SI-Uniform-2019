@@ -1,5 +1,5 @@
 var express = require('express');
-
+var path = require('path');
 var port = process.env.PORT || 31920;
 /*
 db.sequelize.sync().then(function(){
@@ -12,8 +12,6 @@ db.sequelize.sync().then(function(){
 */
 
 var app = express();
-
-
 
 
 app.listen(port, function(){ console.log('server successfully started on port '+port); });
