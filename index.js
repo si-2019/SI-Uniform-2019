@@ -1,5 +1,5 @@
-const express = require('express');
-const port = process.env.PORT || 3453464; 
+const express = require("express");
+const port = process.env.PORT || 31920; 
 const app = express();
 
 app.get('/',function(req,res)
@@ -9,5 +9,5 @@ app.get('/',function(req,res)
     res.end(JSON.stringify(jsonString));
 })
 
-app.listen(port, function(){ console.log('server successfully started on port '+PORT); });
+app.listen(port, function(){ console.log('server successfully started on port '+port); });
 
