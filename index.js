@@ -529,7 +529,7 @@ app.get('/getStudentIspiti/:idStudenta',function(req,res)
                                         a = ispit.termin;
                                        
                                         
-                                        vrijemeSati = String(a.getHours()-2).padStart(2, '0')+':'+ String(a.getMinutes()).padStart(2, '0');
+                                        vrijemeSati = String(a.getHours()).padStart(2, '0')+':'+ String(a.getMinutes()).padStart(2, '0');
                                     }
                                     else
                                     {
@@ -726,7 +726,7 @@ app.get('/getProfesorIspiti/:idStudenta',function(req,res)
                                     var yyyy = datumce.getFullYear();
                                     datumce = yyyy + '/' + mm + '/' + dd;
                                     a = ispit.termin;                                    
-                                    vrijemeSati = String(a.getHours()-2).padStart(2, '0')+':'+ String(a.getMinutes()).padStart(2, '0');
+                                    vrijemeSati = String(a.getHours()).padStart(2, '0')+':'+ String(a.getMinutes()).padStart(2, '0');
                                 }
                                 else
                                 {
