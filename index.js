@@ -3,8 +3,8 @@ var path = require('path');
 var fs = require('fs');
 /*var pug = require('pug');*/
 var bodyParser = require('body-parser');
-/*var upload = require('express-fileupload');
-var cors = require('cors');
+var upload = require('express-fileupload');
+/*var cors = require('cors');
 var axios=require('axios');*/
 var port = process.env.PORT || 31920;
 /*
