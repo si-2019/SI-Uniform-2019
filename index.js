@@ -8,7 +8,7 @@ var cors = require('cors');
 const db = require('./models/db.js');
 var axios=require('axios');
 var PORT = process.env.PORT || 31920;
-
+/*
 db.sequelize.sync().then(function(){
    console.log("Uspjesno povezano sa bazom");
 }).catch(function(err){
@@ -16,7 +16,7 @@ db.sequelize.sync().then(function(){
     console.log(err);
  });
 
-
+*/
 
 var app = express();
 app.use(upload());
