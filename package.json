@@ -1,12 +1,10 @@
 {
   "name": "si-uniform-2019",
-  "version": "1.0.0",
-  "description": "Prikazivanje rasporeda",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
     "start": "node ./index.js"
   },    
-  "dependencies": {
-    
-  }
-  
+  "dependencies": {    
+  }  
 }
