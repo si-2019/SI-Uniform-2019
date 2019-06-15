@@ -7,7 +7,7 @@ var upload = require('express-fileupload');
 var cors = require('cors');
 const db = require('./models/db.js');
 var axios=require('axios');
-var PORT = process.env.PORT || 31920;
+var PORT = process.env.PORT;
 
 db.sequelize.sync().then(function(){
    console.log("Uspjesno povezano sa bazom");
