@@ -26,7 +26,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.set('views',path.join(__dirname+"/public/",'views'));
 app.set('view engine', 'pug');
-/*
+
 const sljedeciDan = (datum) =>// funkcija vraca datum sljedeceg dana
 {
   var today = new Date(datum);
@@ -1356,7 +1356,7 @@ app.post("/dodajStudentaRandomGroup/:idStudent",function(req,res)
     })
 });
 
-*/
+
 
 app.listen(port, function(){ console.log('server successfully started on port '+port); });
 
