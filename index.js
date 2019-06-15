@@ -1230,6 +1230,9 @@ app.get('/getRedoslijed',function(req,res)
     db.redoslijed.findOne({where:{id:"1"}}).then(function(redoslijedic){
         res.writeHead(200, {'Content-Type': 'application/json'});  
         res.end(JSON.stringify(redoslijedic));         
+    }).then(function(){
+        res.writeHead(200, {'Content-Type': 'application/json'});  
+        res.end(JSON.stringify(""));         
     }); 
 });
 
