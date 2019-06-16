@@ -73,9 +73,9 @@ const prviDanuSedmici = (datum) => //funkcija vraca prvi dan u sedmici u kojo je
 app.get('/addZabiljeska/:Zabiljeska/:idStudent/:idGrupaTermina/:ispit',function(req,res)
 {    
     res.header("Access-Control-Allow-Origin", '*');
-   
+    res.header("Access-Control-Allow-Credentials", true);
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
+  res.header("Access-Control-Allow-Headers", ' *);
     var isTrueSet = (req.params.ispit.toString() == 'true');
     
     db.zabiljeska.findOne({where:{idZabiljeska:newID,naziv:req.params.Zabiljeska,idStudent:req.params.idStudent}}).then(function(kd){
@@ -171,9 +171,9 @@ app.get('/addZabiljeska/:Zabiljeska/:idStudent/:idGrupaTermina/:ispit',function(
 app.get('/updateZabiljeska/:Zabiljeska/:idStudent/:idGrupaTermina/:ispit',function(req,res)
 {
     res.header("Access-Control-Allow-Origin", '*');
-   
+    res.header("Access-Control-Allow-Credentials", true);
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
+  res.header("Access-Control-Allow-Headers", ' *);
     var isTrueSet = (req.params.ispit == 'true'); 
     var jsonString={};
     jsonString=
@@ -281,9 +281,9 @@ app.get('/updateZabiljeska/:Zabiljeska/:idStudent/:idGrupaTermina/:ispit',functi
 })
 app.get('/deleteZabiljeska/:idStudent/:idGrupaTermina/:ispit',function(req,res){
     res.header("Access-Control-Allow-Origin", '*');
-   
+    res.header("Access-Control-Allow-Credentials", true);
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
+  res.header("Access-Control-Allow-Headers", ' *);
     var isTrueSet = (req.params.ispit == 'true'); 
     var jsonString={};
     jsonString=
@@ -398,9 +398,9 @@ app.get('/deleteZabiljeska/:idStudent/:idGrupaTermina/:ispit',function(req,res){
 app.get('/getStudentTermini/:idStudenta',function(req,res)
 {
     res.header("Access-Control-Allow-Origin", '*');
-   
+    res.header("Access-Control-Allow-Credentials", true);
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
+  res.header("Access-Control-Allow-Headers", ' *);
     //ruta vraca sedmicne termine za odredjenog studenta
 
     // pretpostavljamo da je id studenta 1
@@ -496,9 +496,9 @@ app.get('/getStudentTermini/:idStudenta',function(req,res)
 app.get('/getStudentIspiti/:idStudenta',function(req,res)
 {
     res.header("Access-Control-Allow-Origin", '*');
-   
+    res.header("Access-Control-Allow-Credentials", true);
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
+  res.header("Access-Control-Allow-Headers", ' *);
     var idStudenta = 1;
 
     var jsonString=new Array();
@@ -609,9 +609,9 @@ app.get('/getStudentIspiti/:idStudenta',function(req,res)
 app.get('/getProfesorTermini/:idProfesor',function(req,res)
 {
     res.header("Access-Control-Allow-Origin", '*');
-   
+    res.header("Access-Control-Allow-Credentials", true);
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
+  res.header("Access-Control-Allow-Headers", ' *);
     //ruta vraca sedmicne termine za odredjenog profesora
 
     // pretpostavljamo da je id profesora 41
@@ -704,9 +704,9 @@ app.get('/getProfesorTermini/:idProfesor',function(req,res)
 app.get('/getProfesorIspiti/:idStudenta',function(req,res)
 {
     res.header("Access-Control-Allow-Origin", '*');
-   
+    res.header("Access-Control-Allow-Credentials", true);
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
+  res.header("Access-Control-Allow-Headers", ' *);
     var idProfesora = 41; //Marina Milicevic
 
     var jsonString=new Array();
@@ -814,9 +814,9 @@ app.get('/getProfesorIspiti/:idStudenta',function(req,res)
 app.get('/getTerminiSala/:idStudent/:idKabinet',function(req,res)
 {
     res.header("Access-Control-Allow-Origin", '*');
-   
+    res.header("Access-Control-Allow-Credentials", true);
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
+  res.header("Access-Control-Allow-Headers", ' *);
     //ruta vraca sedmicne termine za odredjenog studenta
 
     // pretpostavljamo da je id studenta 1
@@ -910,9 +910,9 @@ app.get('/getTerminiSala/:idStudent/:idKabinet',function(req,res)
 app.get('/getIspitiSala/:idStudent/:idKabinet',function(req,res)
 {
     res.header("Access-Control-Allow-Origin", '*');
-   
+    res.header("Access-Control-Allow-Credentials", true);
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
+  res.header("Access-Control-Allow-Headers", ' *);
     var idStudenta = 1;
 
     var jsonString=new Array();
@@ -1026,9 +1026,9 @@ app.get('/getIspitiSala/:idStudent/:idKabinet',function(req,res)
 app.get('/getGrupeAbeceda/:idPredmet',function(req,res)
 {
     res.header("Access-Control-Allow-Origin", '*');
-   
+    res.header("Access-Control-Allow-Credentials", true);
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
+  res.header("Access-Control-Allow-Headers", ' *);
     var jsonString=[];
     db.grupaTermina.findAll({where:{idPredmet:req.params.idPredmet}}).then(function(grupe){
         
@@ -1125,9 +1125,9 @@ app.get('/getGrupeAbeceda/:idPredmet',function(req,res)
 app.get('/getGrupePrijavljivanje/:idPredmet',function(req,res)
 {
     res.header("Access-Control-Allow-Origin", '*');
-   
+    res.header("Access-Control-Allow-Credentials", true);
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
+  res.header("Access-Control-Allow-Headers", ' *);
     var jsonString=[];
     db.grupaTermina.findAll({where:{idPredmet:req.params.idPredmet}}).then(function(grupe){
         
@@ -1224,9 +1224,9 @@ app.get('/getGrupePrijavljivanje/:idPredmet',function(req,res)
 app.post('/addStudentToGroup/:idLogovanogStudenta/:idGrupaTermina',function(req,res)
 {
     res.header("Access-Control-Allow-Origin", '*');
-   
+    res.header("Access-Control-Allow-Credentials", true);
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
+  res.header("Access-Control-Allow-Headers", ' *);
     var newID = parseInt(new Date().getTime().toString().substring(4));
     var json={
         success:true
@@ -1243,9 +1243,9 @@ app.post('/addStudentToGroup/:idLogovanogStudenta/:idGrupaTermina',function(req,
 app.post('/removeStudentFromGroup/:idLogovanogStudenta/:idGrupaTermina',function(req,res)
 {
     res.header("Access-Control-Allow-Origin", '*');
-   
+    res.header("Access-Control-Allow-Credentials", true);
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
+  res.header("Access-Control-Allow-Headers", ' *);
     
     db.grupaTermin_student.destroy({where:{idGrupaTermina:req.params.idGrupaTermina,
         idStudent:req.params.idLogovanogStudenta}}).then(function(k){
@@ -1262,9 +1262,9 @@ app.post('/removeStudentFromGroup/:idLogovanogStudenta/:idGrupaTermina',function
 app.post('/promjenaRoka/:idPredmet/:noviGodina/:noviMjesec/:noviDan',function(req,res)
 {
     res.header("Access-Control-Allow-Origin", '*');
-   
+    res.header("Access-Control-Allow-Credentials", true);
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
+  res.header("Access-Control-Allow-Headers", ' *);
     db.grupaTermina.update({
         rokPrijave: req.params.noviGodina+'-'+req.params.noviMjesec+'-'+req.params.noviDan
     }, {
@@ -1284,9 +1284,9 @@ app.post('/promjenaRoka/:idPredmet/:noviGodina/:noviMjesec/:noviDan',function(re
 app.get('/getRedoslijed',function(req,res)
 {
     res.header("Access-Control-Allow-Origin", '*');
-   
+    res.header("Access-Control-Allow-Credentials", true);
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
+  res.header("Access-Control-Allow-Headers", ' *);
     db.redoslijed.findOne({where:{id:"1"}}).then(function(redoslijedic){
         res.writeHead(200, {'Content-Type': 'application/json'});  
         res.end(JSON.stringify(redoslijedic));         
@@ -1299,9 +1299,9 @@ app.get('/getRedoslijed',function(req,res)
 app.post('/promjenaRedoslijeda',function(req,res)
 {
     res.header("Access-Control-Allow-Origin", '*');
-   
+    res.header("Access-Control-Allow-Credentials", true);
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
+  res.header("Access-Control-Allow-Headers", ' *);
     db.redoslijed.findOne({where:{id:"1"}}).then(function(redoslijedic){
         if(redoslijedic.naziv=="Redoslijed abecede")
         {
@@ -1330,9 +1330,9 @@ app.post('/promjenaRedoslijeda',function(req,res)
 app.get('/getPredmet/:idPredmet',function(req,res)
 {
     res.header("Access-Control-Allow-Origin", '*');
-   
+    res.header("Access-Control-Allow-Credentials", true);
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
+  res.header("Access-Control-Allow-Headers", ' *);
     db.predmet.findOne({where:{id:req.params.idPredmet}}).then(function(predmet){
         res.writeHead(200, {'Content-Type': 'application/json'});  
         res.end(JSON.stringify(predmet));         
@@ -1342,9 +1342,9 @@ app.get('/getPredmet/:idPredmet',function(req,res)
 app.get('/getNesvrstaniStudentiNaPredmetu/:idPredmet',function(req,res)
 {
     res.header("Access-Control-Allow-Origin", '*');
-   
+    res.header("Access-Control-Allow-Credentials", true);
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
+  res.header("Access-Control-Allow-Headers", ' *);
     var studentiLista=[];    
     db.predmet_student.findAll({where:{idPredmet:req.params.idPredmet,ocjena:null,datum_upisa:null}}).then(function(predmetLinkovi)
     {
@@ -1396,9 +1396,9 @@ app.get('/getNesvrstaniStudentiNaPredmetu/:idPredmet',function(req,res)
 app.post('/removeGroup/:idGrupaTermina',function(req,res)
 {
     res.header("Access-Control-Allow-Origin", '*');
-   
+    res.header("Access-Control-Allow-Credentials", true);
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
+  res.header("Access-Control-Allow-Headers", ' *);
     db.grupaTermin_student.destroy({where:{idGrupaTermina:req.params.idGrupaTermina}}).then(function(k){
         db.grupaTermina.destroy({where:{idGrupaTermina:req.params.idGrupaTermina}}).then(function(kk){
             
@@ -1414,9 +1414,9 @@ app.post('/removeGroup/:idGrupaTermina',function(req,res)
 app.post("/dodajStudentaRandomGroup/:idStudent",function(req,res)
 {
     res.header("Access-Control-Allow-Origin", '*');
-   
+    res.header("Access-Control-Allow-Credentials", true);
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
+  res.header("Access-Control-Allow-Headers", ' *);
     var json={
         success: true
     }
